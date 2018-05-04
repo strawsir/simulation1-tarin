@@ -1,10 +1,14 @@
 import axios from 'axios';
 import React, {Component} from 'react';
 
-function Product(){
+function Product(product){
     return(
         <div>
-            Product
+            <img src={`${product.imageURL}`} alt={product.productName}/>
+            <br/>
+            {product.productName}
+            <br/>
+            {`$${product.price}`}
         </div>
     )
 }
