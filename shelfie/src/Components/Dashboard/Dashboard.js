@@ -7,14 +7,30 @@ export default class Dashboard extends Component{
         super(props)
     }
 
+    getAll(){
+        this.props.getAll();
+    }
+
+    deleteOne(id){
+        axios.delete(`./api/product/${id}`)
+        .then(res =>{
+            console.log(res.data)
+            this.getAll();
+        })
+    }
+
     render(){
         return(
             <div>
                 {this.props.inventoryList.map(product =>{
                     return(
-                        <div key={product.name}>
-                            <Product {...product}/>
+                        <div key={product.productid}>
+                            <Product {...product} deleteThis={this.deleteOne}/>
+                            <button onClick={()=>this.deleteOne(product.productid)}>DELETE :(</button>
+                            
+                            <br/>
                         </div>
+                    
                     )
                 })}
                 Dashboard
