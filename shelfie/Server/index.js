@@ -10,6 +10,7 @@ massive( process.env.CONNECTION_STRING ).then( dbInstance => app.set('db', dbIns
 app.get('/api/inventory', inventoryController.getInventory)
 app.post('/api/product', inventoryController.postProduct)
 app.delete('/api/product/:id', inventoryController.deleteProduct)
+app.put('api/product/:id', inventoryController.updateProduct)
 
 
 const port = 4000;

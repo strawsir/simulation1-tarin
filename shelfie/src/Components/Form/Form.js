@@ -16,6 +16,14 @@ export default class Form extends Component{
         this.addProduct = this.addProduct.bind(this);
     }
 
+    updateProduct(id){
+        axios.put(`./api/product/${id}`, {
+            imageURL:this.state.imageURL,
+            productName:this.state.productName,
+            price: this.state.price
+        })
+    }
+
     resetInput(){
         this.setState({
             imageURL:'',
@@ -58,8 +66,11 @@ export default class Form extends Component{
     render(){
         return(
             <div>
+                IMAGE URL:
                 <input value={this.state.imageURL} onChange={this.updateImage} type="text"/>
+                NAME:
                 <input value={this.state.productName} onChange={this.updateProduct} type="text"/>
+                PRICE:
                 <input value = {this.state.price} onChange={this.updatePrice} type="number"/>
                 <button onClick={this.resetInput}>Cancel</button>
                 <button onClick={() => this.addProduct(this.state.imageURL, this.state.productName, this.state.price)}>Add to Inventory</button>

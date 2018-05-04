@@ -20,8 +20,17 @@ module.exports={
             const dbInstance = req.app.get('db');
             const {params} = req;
 
-            dbInstance.deleteProduct([params.id])
+            dbInstance.deleteProduct([params.productid])
             .then( () => res.status(200).send())
             .catch(()=>res.status(500).send())
+    },
+
+    updateProduct:(req, res)=>{
+        const dbInstance = req.app.get('db');
+        const{params, query} = req;
+
+        dbInstance.updateProduct([params.productid, query.productname, query.imageurl, query.price])
+        .then(()=>res.status(200).send())
+        .catch(()=>res.status(500).send());
     }
 }
