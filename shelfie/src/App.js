@@ -12,21 +12,31 @@ class App extends Component {
     this.state = {
       inventoryList:[]
     }
+    // this.getAll=this.getAll.bind(this)
+    this.componentDidMount = this.componentDidMount.bind(this)
   }
 
+
 componentDidMount(){
-  axios.get('./api/inventory').then(res => {
+  axios.get('./api/inventory').then(res =>{
     console.log(res)
-    this.setState({inventoryList: res.data})
+    this.setState({inventoryList:res.data})
   })
 }
+
+// getAll(){
+//   axios.get('./api/inventory').then(res => {
+//     console.log(res)
+//     this.setState({inventoryList: res.data})
+//   })
+// }
 
 
   render() {
     return (
       <div className="App">
       <Dashboard inventoryList={this.state.inventoryList}/>
-      <Form getAll={this.state.componentDidMount}/>
+      <Form getAll={this.componentDidMount}/>
       <Header/>
       </div>
     );

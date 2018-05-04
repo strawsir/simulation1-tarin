@@ -12,7 +12,7 @@ module.exports={
 
         req.app.get('db').createProduct([productName, imageURL, price]).then(
             products => {
-                res.status(200).send(products)
+                res.status(200).send(products).catch(err => console.log(err))
             }
         )
     }

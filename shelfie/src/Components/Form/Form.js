@@ -7,8 +7,7 @@ export default class Form extends Component{
         this.state={
             imageURL:'',
             productName:'',
-            price: 0,
-            products:[]
+            price: 0
         }
         this.resetInput = this.resetInput.bind(this);
         this.updateImage = this.updateImage.bind(this);
@@ -39,15 +38,19 @@ export default class Form extends Component{
             price: e.target.value
         })
     }
+    reGet(){
+        this.props.getAll();
+    }
 
-    addProduct(imageURL, productName, price){
+    addProduct(image, name, price){
         axios.post('/api/product', {
-        imageURL:imageURL,
-        productName: productName,
+        imageURL:image,
+        productName: name,
         price: price
     }).then(res => {
         
         this.setState({products:res.data})
+        this.reGet();
         this.resetInput();
     })
     }
@@ -59,7 +62,7 @@ export default class Form extends Component{
                 <input value={this.state.productName} onChange={this.updateProduct} type="text"/>
                 <input value = {this.state.price} onChange={this.updatePrice} type="number"/>
                 <button onClick={this.resetInput}>Cancel</button>
-                <button onClick={() => this.addProduct()}>Add to Inventory</button>
+                <button onClick={() => this.addProduct(this.state.imageURL, this.state.productName, this.state.price)}>Add to Inventory</button>
                 
             </div>
         )
